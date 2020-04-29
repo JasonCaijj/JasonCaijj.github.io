@@ -309,7 +309,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-04-29T22:29:57+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-29T22:59:33+08:00">
                 2020-04-29
               </time>
             
@@ -381,7 +381,8 @@
 <h4 id="关键概念"><a href="#关键概念" class="headerlink" title="关键概念"></a>关键概念</h4><h5 id="Model-Agnostic"><a href="#Model-Agnostic" class="headerlink" title="Model-Agnostic"></a>Model-Agnostic</h5><p>MAML算法claim自己是模型无关，换言之，是可以换掉内部模型单元。所以，MAML算法其实是一个算法框架，我们可以根据自身需求把里面的内部模型换成我们所需的。Paper中就列举了一个MAML+CNN的例子，我们其实可以把它拓展成MAML+RNN，MAML+LSTM等其他模式</p>
 <h5 id="Meta-Learning"><a href="#Meta-Learning" class="headerlink" title="Meta-Learning"></a>Meta-Learning</h5><p>Meta-Learning, 元学习。元学习这个概念很玄乎，在AI里头，元学习的意思大概是<code>learn how to learn</code>, 学会如何学习，更白话点就是学习怎么提高学习能力。学习能力的提高是为了应对当新任务来临时，如何更快更好地解决，也就是说，<strong>泛化能力要好</strong>。以我的理解是，元学习就像个没有分化的分化组织，一旦遇到合适环境就能迅速分化成相应的功能组织，这个“环境”就是新问题或新任务。其实这种能力和<u>transfer learning</u>在某种程度上有些雷同，可是这不同点我现在也不太了解，等我知道后再写篇post说说吧。</p>
 <p>而MAML这个算法框架是通过“gradient by gradient”的方法来学习到这种能力，细节在下文会提到。</p>
-
+<h5 id="Fast-Adaptation"><a href="#Fast-Adaptation" class="headerlink" title="Fast Adaptation"></a>Fast Adaptation</h5><p>Fast Adaptation, 顾名思义，就是快速学习并解决问题，从中也说明了元学习的target。MAML通过“gradient by gradient”来学习到自身网络中的<strong>天使权重</strong>，通过在具体任务上学习并迭代几次，网络权重就能有比较好的表现。就像是武侠小说中的主人公，天赋异禀，随便学几下就能打boss。</p>
+<h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4>
           
         
       
@@ -806,7 +807,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
