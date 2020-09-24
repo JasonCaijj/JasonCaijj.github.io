@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="本蔡不菜">
 <meta property="og:description" content="概率论与数理统计一、随机事件与概率1. 随机事件及其运算1.1 随机试验 确定性现象 随机性现象 统计性规律 随机试验：对随机现象的观察  1.2 样本空间1.3 随机事件 随机事件（事件）：在随机试验中可能出现的结果或不出现的结果 基本事件：仅含一个样本点的随机事件 必然事件：一定发生的事件 不可能事件：一定不发生的事件  1.4 随机事件的关系及其运算 随机事件的关系： $A \subset">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-09-22T08:39:52.448Z">
+<meta property="og:updated_time" content="2020-09-24T14:20:06.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="概率论与数理统计(一)">
 <meta name="twitter:description" content="概率论与数理统计一、随机事件与概率1. 随机事件及其运算1.1 随机试验 确定性现象 随机性现象 统计性规律 随机试验：对随机现象的观察  1.2 样本空间1.3 随机事件 随机事件（事件）：在随机试验中可能出现的结果或不出现的结果 基本事件：仅含一个样本点的随机事件 必然事件：一定发生的事件 不可能事件：一定不发生的事件  1.4 随机事件的关系及其运算 随机事件的关系： $A \subset">
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-09-22T16:39:52+08:00">
-                2020-09-22
+              <time title="更新于" itemprop="dateModified" datetime="2020-09-24T22:20:06+08:00">
+                2020-09-24
               </time>
             
           </span>
@@ -413,7 +413,7 @@
 </ul>
 <h5 id="3-等可能概型"><a href="#3-等可能概型" class="headerlink" title="3. 等可能概型"></a>3. 等可能概型</h5><h6 id="3-1-古典概型"><a href="#3-1-古典概型" class="headerlink" title="3.1 古典概型"></a>3.1 古典概型</h6><ol>
 <li>随机试验的样本空间只有有限个样本点，记作$\Omega=\{w_1, w_2, … , w_n\}$</li>
-<li>每个随机事件发生的可能性相等，即<script type="math/tex">P(\{w_1\})=...=P(\{w_n\})=1/n</script>若随机事件$A$中含有$n_A$个样本点，则事件$A$的概率为<script type="math/tex">P(A)=\frac{A中所含样本点的个数}{\Omega中所有样本点的个数}=\frac{n_A}{n}</script></li>
+<li>每个随机事件发生的可能性相等，即<script type="math/tex">P(\{w_1\})=...=P(\{w_n\})=1/n</script>若随机事件$A$中含有$n_A$个样本点，则事件$A$的概率:<script type="math/tex; mode=display">P(A) = \frac{A中所含样本点的个数}{\Omega中所有样本点的个数} = \frac{n_A}{n}</script></li>
 <li>问题：<ul>
 <li>抽样模型</li>
 <li>抽奖模型</li>
@@ -431,6 +431,34 @@
 </ul>
 </li>
 </ol>
+<h5 id="4-条件概率与事件的相互独立性"><a href="#4-条件概率与事件的相互独立性" class="headerlink" title="4. 条件概率与事件的相互独立性"></a>4. 条件概率与事件的相互独立性</h5><h6 id="4-1-条件概率"><a href="#4-1-条件概率" class="headerlink" title="4.1 条件概率"></a>4.1 条件概率</h6><ul>
+<li>定义1: 设$E$为随机试验，$\Omega$是样本空间，$A$, $B$是随机试验$E$上的两个随机事件且$P(A)&gt;0$，称$P(B|A)=\frac{P(AB)}{P(A)}$为在事件$A$发生的条件下事件$B$发生的概率，称为<strong>条件概率</strong>，记为$P(B|A)$</li>
+<li>三个基本性质：<ul>
+<li><strong>非负性公理</strong>：对于任意事件$A$，总有$P(A|B)\geq0$</li>
+<li><strong>规范性公理</strong>：$P(\Omega|B)=1$</li>
+<li><strong>可列可加性公理</strong>：若$A_1$, $A_2$, … ,为两两互不相容的一组事件，则有$P(\mathop{\cup}^{\infty}\limits_{i=1}A_i|B)=\sum^{\infty}\limits_{i=1}P(A_i|B)$ </li>
+</ul>
+</li>
+<li>定理：<ul>
+<li><ol>
+<li>概率的乘法公式：设$A$，$B$为随机试验中$E$上的两个事件，且$P(A)&gt;0$，则有<script type="math/tex">P(AB)=P(A)P(B|A)</script>同理，若$P(B)&gt;0$，有<script type="math/tex">P(AB)=P(B)P(A|B)</script><br>【拓展】：设$A_1$, $A_2$, … , $A_n$为一事件组，且$P(A_1A_2…A_n)&gt;0$，则<script type="math/tex">P(A_1A_2...A_n)=P(A_1)P(A_2|A_1)P(A_3|A_1A_2)...P(A_n|A_1A_2...A_n)</script></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h6 id="4-2-事件的相互独立性"><a href="#4-2-事件的相互独立性" class="headerlink" title="4.2 事件的相互独立性"></a>4.2 事件的相互独立性</h6><ul>
+<li>定义2: 设$A$，$B$为试验$E$的两个事件，如果满足等式<script type="math/tex">P(AB)=P(A)P(B)</script>则称事件$A$，事件$B$相互独立，简称$A$，$B$独立</li>
+<li>定理2: 若$A$，$B$独立，则以下事件也相互独立：<br>  $P(\overline{A}B)=P(\overline{A})P(B)$<br>  $P(A\overline{B})=P(A)P(\overline{B})$<br>  $P(\overline{A}\overline{B})=P(\overline{A})P(\overline{B})$</li>
+<li>定义3: 设$A$，$B$，$C$是试验$E$的三个事件，如果满足等式<br>  $P(AB)=P(A)P(B)$<br>  $P(AC)=P(A)P(C)$<br>  $P(BC)=P(B)P(C)$<br>  则称事件$A$，$B$，$C$<strong>两两相互独立</strong></li>
+<li>定义4：设$A$，$B$，$C$是试验$E$的三个事件，如果满足等式<br>  $P(AB)=P(A)P(B)$<br>  $P(AC)=P(A)P(C)$<br>  $P(BC)=P(B)P(C)$<br>  $P(ABC)=P(A)P(B)P(C)$<br>  则称事件$A$，$B$，$C$<strong>相互独立</strong></li>
+<li>问题：系统可靠性问题</li>
+</ul>
+<h5 id="5-全概率公式与贝叶斯公式"><a href="#5-全概率公式与贝叶斯公式" class="headerlink" title="5. 全概率公式与贝叶斯公式"></a>5. 全概率公式与贝叶斯公式</h5><ul>
+<li>定义：<br>  设$E$是随机试验，$\Omega$是相应的样本空间，$A_1$，$A_2$，…，$A_n$为$\Omega$的一个事件组，若满足条件：<br>  (1) $A_i \cap A_j=\emptyset (i \neq j)$<br>  (2) $A_1 \cup A_2 \cup … \cup A_n=\Omega$<br>  则称事件组$A_1$，$A_2$，…，$A_n$为样本空间的一个<strong>完备事件组</strong>，完备事件组完成了对样本空间的切割</li>
+<li>定理1：<br>  <strong>(全概率公式)</strong> 设$A_1$，$A_2$，…，$A_n$为样本空间$\Omega$的一个完备事件组，且$P(A_i)&gt;0(i=1,2,…,n)$，$B$为任一事件，则<script type="math/tex">P(B)=\sum\limits_{i=1}^nP(A_i)P(B|A_i)</script></li>
+<li>定理2:<br>  <strong>(贝叶斯公式)</strong> 设$A_1$，$A_2$，…，$A_n$为样本空间$\Omega$的一个完备事件组，且$P(A_i)&gt;0(i=1,2,…,n)$，$B$为满足条件$P(B)&gt;0$的任一事件，则<script type="math/tex">P(Ai|B)=\frac{P(A_i)P(B|A_i)}{\sum^n\limits_{i=1}P(A_i)P(B|A_i)}=\frac{P(A_i)P(B|A_i)}{P(B)}</script></li>
+</ul>
 
       
     </div>
@@ -603,7 +631,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概率论与数理统计"><span class="nav-number">1.</span> <span class="nav-text">概率论与数理统计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、随机事件与概率"><span class="nav-number">1.1.</span> <span class="nav-text">一、随机事件与概率</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-随机事件及其运算"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 随机事件及其运算</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-1-随机试验"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">1.1 随机试验</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-2-样本空间"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">1.2 样本空间</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-3-随机事件"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">1.3 随机事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-4-随机事件的关系及其运算"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">1.4 随机事件的关系及其运算</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-概率的定义及其性质"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 概率的定义及其性质</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2-1-公理"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">2.1 公理</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-2-性质"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">2.2 性质</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-等可能概型"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 等可能概型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-1-古典概型"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">3.1 古典概型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-2-几何概型"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">3.2 几何概型</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概率论与数理统计"><span class="nav-number">1.</span> <span class="nav-text">概率论与数理统计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、随机事件与概率"><span class="nav-number">1.1.</span> <span class="nav-text">一、随机事件与概率</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-随机事件及其运算"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 随机事件及其运算</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-1-随机试验"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">1.1 随机试验</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-2-样本空间"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">1.2 样本空间</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-3-随机事件"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">1.3 随机事件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-4-随机事件的关系及其运算"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">1.4 随机事件的关系及其运算</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-概率的定义及其性质"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 概率的定义及其性质</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2-1-公理"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">2.1 公理</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-2-性质"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">2.2 性质</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-等可能概型"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 等可能概型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-1-古典概型"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">3.1 古典概型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-2-几何概型"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">3.2 几何概型</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-条件概率与事件的相互独立性"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. 条件概率与事件的相互独立性</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#4-1-条件概率"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">4.1 条件概率</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-2-事件的相互独立性"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">4.2 事件的相互独立性</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-全概率公式与贝叶斯公式"><span class="nav-number">1.1.5.</span> <span class="nav-text">5. 全概率公式与贝叶斯公式</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
