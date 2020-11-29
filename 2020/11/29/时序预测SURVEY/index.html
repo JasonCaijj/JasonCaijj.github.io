@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="time-series-forecasting,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="时间序列，是一组按照时间发生顺序而排列的数据序列。而时序预测，则是对这些数据序列关于未来一段时间的预测。根据预测标的的数目和性质，我们可以把预测标的分为以下三类：  单条时序，如小明在某段时间内的银行余额流水 多条且有一定相关性的时序，如小明及其家人某段时间内的银行余额流水  本Survey将根据预测标的为总分类标准，介绍常用的及较为sota的时序预测算法。 1. 单条序列的时序预测算法对于单条时">
+<meta name="keywords" content="time-series-forecasting">
+<meta property="og:type" content="article">
+<meta property="og:title" content="时序预测SURVEY">
+<meta property="og:url" content="http://yoursite.com/2020/11/29/时序预测SURVEY/index.html">
+<meta property="og:site_name" content="本蔡不菜">
+<meta property="og:description" content="时间序列，是一组按照时间发生顺序而排列的数据序列。而时序预测，则是对这些数据序列关于未来一段时间的预测。根据预测标的的数目和性质，我们可以把预测标的分为以下三类：  单条时序，如小明在某段时间内的银行余额流水 多条且有一定相关性的时序，如小明及其家人某段时间内的银行余额流水  本Survey将根据预测标的为总分类标准，介绍常用的及较为sota的时序预测算法。 1. 单条序列的时序预测算法对于单条时">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/11/29/时序预测SURVEY/RNN.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/29/时序预测SURVEY/TCN.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/29/时序预测SURVEY/NBEATS.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/29/时序预测SURVEY/DeepAR.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/11/29/时序预测SURVEY/maml-1.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/29/时序预测SURVEY/MAML-2.png">
+<meta property="og:updated_time" content="2020-11-29T07:13:56.552Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="时序预测SURVEY">
+<meta name="twitter:description" content="时间序列，是一组按照时间发生顺序而排列的数据序列。而时序预测，则是对这些数据序列关于未来一段时间的预测。根据预测标的的数目和性质，我们可以把预测标的分为以下三类：  单条时序，如小明在某段时间内的银行余额流水 多条且有一定相关性的时序，如小明及其家人某段时间内的银行余额流水  本Survey将根据预测标的为总分类标准，介绍常用的及较为sota的时序预测算法。 1. 单条序列的时序预测算法对于单条时">
+<meta name="twitter:image" content="http://yoursite.com/2020/11/29/时序预测SURVEY/RNN.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/11/29/时序预测SURVEY/">
+
+
+
+
+
+  <title>时序预测SURVEY | 本蔡不菜</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">本蔡不菜</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">敲键盘的</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/29/时序预测SURVEY/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jason Cai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="本蔡不菜">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">时序预测SURVEY</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-29T15:09:00+08:00">
+                2020-11-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-11-29T15:13:56+08:00">
+                2020-11-29
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>时间序列，是一组按照时间发生顺序而排列的数据序列。而时序预测，则是对这些数据序列关于未来一段时间的预测。根据预测标的的数目和性质，我们可以把预测标的分为以下三类：</p>
+<ul>
+<li>单条时序，如小明在某段时间内的银行余额流水</li>
+<li>多条且有一定相关性的时序，如小明及其家人某段时间内的银行余额流水</li>
+</ul>
+<p>本Survey将根据预测标的为总分类标准，介绍常用的及较为sota的时序预测算法。</p>
+<h3 id="1-单条序列的时序预测算法"><a href="#1-单条序列的时序预测算法" class="headerlink" title="1. 单条序列的时序预测算法"></a>1. 单条序列的时序预测算法</h3><p>对于单条时序的预测，根据模型学习方法的性质，基本可以分为两大类：</p>
+<ul>
+<li>基于统计的算法</li>
+<li>基于学习的算法</li>
+</ul>
+<h4 id="1-1-基于统计的算法"><a href="#1-1-基于统计的算法" class="headerlink" title="1.1 基于统计的算法"></a>1.1 基于统计的算法</h4><p>基于统计的算法大多为传统的时序预测算法，常用的算法有：</p>
+<ul>
+<li>泛ARIMA类</li>
+<li>泛指数平滑类（ETS）</li>
+<li>基于时序分解-预测-合成的算法</li>
+</ul>
+<h5 id="1-1-1-泛ARIMA类"><a href="#1-1-1-泛ARIMA类" class="headerlink" title="1.1.1 泛ARIMA类"></a>1.1.1 泛ARIMA类</h5><p>在介绍ARIMA之前，先要了解一下ARMA模型。ARMA模型是集<strong>自回归模型(Auto-Regressive, AR)</strong>和<strong>移动平均模型(Moving Average, MA)</strong>于一体，针对<strong>平稳序列</strong>的预测算法。而序列的<strong>平稳性</strong>是指序列的方差不会随时间的推移而产生大幅度的变化。</p>
+<ul>
+<li><p>序列的<strong>平稳性</strong>：指序列的方差不会随时间的推移而产生大幅度的变化</p>
+</li>
+<li><p>自回归模型<strong>(Auto-Regressive, AR)</strong>：基于预测标的历史数据的组合的预测</p>
+<ul>
+<li>$p$阶的AR模型的公式<script type="math/tex; mode=display">
+y = c + \alpha_1*y_{t-1} + \alpha_2*y_{t-2} + ... + \alpha_p*y_{t-p} + \varepsilon_t，其中c是常数项，\varepsilon_t是白噪声</script></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>移动平均模型<strong>(Moving Average, MA)</strong>: 基于历史预测误差的组合的预测</p>
+<ul>
+<li>$q$阶的MA模型公式为：<script type="math/tex; mode=display">
+y = c + \beta_1*e_{t-1} + \beta_2*e_{t-2} + ... + \beta_q*e_{t-q} + \varepsilon_t，其中c是常数项，\varepsilon_t是白噪声</script></li>
+</ul>
+<script type="math/tex; mode=display">
+e_t = y_t -\hat{y_t}, y_t为实际值, \hat{y_t}为预测值</script></li>
+</ul>
+<p><strong>ARMA模型</strong></p>
+<ul>
+<li>一个$p$阶AR，$q$阶MA的ARMA模型<strong>( ARMA(p,q) )</strong>公式为：<script type="math/tex; mode=display">
+y_t = c + \alpha_1*y_{t-1} + \alpha_2*y_{t-2}+...+\alpha_p*y_{t-p}+\beta_1*e_{t-1}+\beta_2*e_{t-2}+...+\beta_q*e_{t-q}</script>其中$y_{t-i}$是历史序列，$e_{t-i}$是历史预测误差，$c$是常数项。</li>
+</ul>
+<p><strong>ARIMA模型</strong></p>
+<p>可是由于现实世界中，大部分时序数据是非平稳的，不符合ARMA模型的假设前提，所以，学者们引入<strong>差分</strong>来消除序列的非平稳性，而兼顾AR、差分、MA的模型就是我们通常所说的<strong>ARIMA</strong>模型</p>
+<ul>
+<li>差分：<ul>
+<li>一阶差分公式：$y’_t=y_t-y_{t-1}$ </li>
+<li>二阶差分公式：$y’’_t = y’_t - y’_{t-1}$</li>
+<li>$d$阶差分公式：$y^d_t = y^{d-1}_t - y^{d-1}_{t-1}$</li>
+<li>季节性差分：$y’_t = y_t - y_{t-m}, m为一年内的季节数量$</li>
+</ul>
+</li>
+<li>一个$p$阶AR，$d$阶差分，$q$阶MA的ARIMA模型<strong>( ARIMA(p, d, q) )</strong>的推算流程：<ol>
+<li>把原序列$d$阶差分后得到差分序列</li>
+<li>用ARMA模型对差分序列进行拟合，得出预测值</li>
+<li>对预测值进行逆差分，还原到原序列的序列空间，得出最终的预测值</li>
+</ol>
+</li>
+<li>若想消除季节性对序列的影响，可以先把原序列进行季节性差分，然后按照ARIMA模型推算流程进行演算。这也是我们通常所说的季节性ARIMA模型<strong>(SARIMA)</strong>。</li>
+</ul>
+<p><strong>ARIMAX模型</strong></p>
+<p>ARIMAX模型是在ARIMA模型的基础上加入了同期特征值对预测结果的影响，使得模型内的因子不局限于历史数据和历史预测误差。</p>
+<p><strong>python开源算法包</strong>：<a href="http://alkaline-ml.com/pmdarima/" target="_blank" rel="noopener">pmdarima</a></p>
+<h5 id="1-1-2-泛指数平滑类-ETS"><a href="#1-1-2-泛指数平滑类-ETS" class="headerlink" title="1.1.2 泛指数平滑类(ETS)"></a>1.1.2 泛指数平滑类(ETS)</h5><p>指数平滑模型的思路是将过去的预测值的加权平均，且其权重随着当前时间里观测时间的距离增加而发生指数型的衰减。指数平滑有以下三种形式：</p>
+<ul>
+<li>一次指数平滑：针对没有<strong>趋势</strong>和<strong>季节性</strong>的序列</li>
+<li><p>二次指数平滑：针对有<strong>趋势</strong>但没<strong>季节性</strong>的序列</p>
+</li>
+<li><p>三次指数平滑（Holt-Winters 季节性方法）：针对既有<strong>趋势</strong>又有<strong>季节性</strong>的序列</p>
+</li>
+</ul>
+<h5 id="一次指数平滑"><a href="#一次指数平滑" class="headerlink" title="一次指数平滑"></a>一次指数平滑</h5><p>一次指数平滑也称简单指数平滑(SES)，其思路是利用历史的预测值来做预测，可权重是呈指数衰减变化的，其公式为：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\hat{y_t} &= \alpha y_{t-1} + (1-\alpha)\hat{y_{t-1}} \\
+&= \alpha \sum^t_{j=1}(1-\alpha)^jy_{t-j} + (1-\alpha)^{t-1}\ell_0 （\ell_0为时刻1的预测值）
+\end{align*}</script><h5 id="二次指数平滑"><a href="#二次指数平滑" class="headerlink" title="二次指数平滑"></a>二次指数平滑</h5><p>二次指数平滑相比于一次指数平滑多了对于<strong>趋势</strong>的考量。<strong>趋势</strong>($b_t$)其实可以理解为斜率或着动量。其公式为：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\hat{y_t} &= \alpha y_{t-1} + (1-\alpha)(\hat{y_{t-1}}+b_{t-1}) \\
+b_t &= \beta(\hat{y_t}-\hat{y_{t-1}})+(1-\beta)b_{t-1}
+\end{align*}</script><h5 id="三次指数平滑"><a href="#三次指数平滑" class="headerlink" title="三次指数平滑"></a>三次指数平滑</h5><p>三次指数平滑也称Holt-winters方法，相较于二次指数平滑多了<strong>季节性($s_t$)</strong>的考量，<strong>季节性</strong>可以理解为在每个固定间隔的时间段重复的模式，而这个固定的时间间隔成为季节，其长度用$m$来表示。三次指数平滑有两种形式，其区别是每个分量的叠加方法，可分为<strong>加法模型</strong>和<strong>乘法模型</strong>。</p>
+<ul>
+<li><p>加法模型：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\hat{y_t} &= \alpha (y_{t-1} - s_{t-m}) + (1-\alpha)(\hat{y_{t-1}}+b_{t-1}) \\
+b_t &= \beta(\hat{y_t}-\hat{y_{t-1}})+(1-\beta)b_{t-1} \\
+s_t &= \gamma(y_t - \hat{y_t}) + (1-\gamma)s_{t-m}
+\end{align*}</script></li>
+<li><p>乘法模型：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\hat{y_t} &= \alpha \frac{y_{t-1}}{s_{t-m}} + (1-\alpha)(\hat{y_{t-1}}+b_{t-1}) \\
+b_t &= \beta(\hat{y_t}-\hat{y_{t-1}})+(1-\beta)b_{t-1} \\
+s_t &= \gamma \frac{y_t}{\hat{y_{t-1}}} + (1-\gamma)s_{t-m}
+\end{align*}</script></li>
+</ul>
+<p>ETS python算法包: <a href="https://www.statsmodels.org/stable/tsa.html" target="_blank" rel="noopener">statsmodels.tsa.ExponentialSmoothing</a></p>
+<h5 id="1-1-3-基于时序分解-预测-合成的算法"><a href="#1-1-3-基于时序分解-预测-合成的算法" class="headerlink" title="1.1.3 基于时序分解-预测-合成的算法"></a>1.1.3 基于时序分解-预测-合成的算法</h5><p>此类方法的思路是将原序列分解为几个分量序列，再对每个分量序列预测，预测后把结果按照逆分解的方法合成回去，从而得到原序列的预测结果。</p>
+<ul>
+<li>分解：<ul>
+<li>常用的分解方法有：<ul>
+<li>STL(Seasonal and Trend decomposition using Loess)：此方法能把序列分解为<strong>趋势项</strong>，<strong>季节项</strong>， <strong>残差项</strong>，因此可解释性较强。[Python：statsmodels.tsa][<a href="https://www.statsmodels.org/stable/generated/statsmodels.tsa.seasonal.STL.html#statsmodels.tsa.seasonal.STL" target="_blank" rel="noopener">https://www.statsmodels.org/stable/generated/statsmodels.tsa.seasonal.STL.html#statsmodels.tsa.seasonal.STL</a>]</li>
+<li>EMD(Empirical Mode Decomposition)：此方法能把序列分解为数个IMF分量序列和残差，每个IMF分量都是平稳的，且残差代表着长期趋势。此方法过往广泛应用于海洋科学和地质科学中，后逐渐在经济领域中流行。<a href="https://pypi.org/project/pyemd/" target="_blank" rel="noopener">Python: pyemd</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>预测：在预测阶段可以使用各种预测方法进行预测</p>
+</li>
+<li><p>合成：根据分解方法的原理将各分量的预测结果合成到原序列空间中</p>
+</li>
+</ul>
+<h4 id="1-2-基于学习的算法"><a href="#1-2-基于学习的算法" class="headerlink" title="1.2 基于学习的算法"></a>1.2 基于学习的算法</h4><p>基于学习的时序预测算法泛指一些基于机器学习/深度学习的时序预测算法。在使用基于学习的算法时，通常会把时序问题转化为<strong>监督学习的回归问题</strong>来看待。常用的及较为sota的算法有：</p>
+<ul>
+<li><p>集成树模型类：XGBoost、LightGBM等</p>
+<ul>
+<li>集成树模型的主要思路是不断生成决策树去拟合上一轮的预测误差。因为模型的由一系列的决策树组成的，所以这类模型具有很强的可解释性。</li>
+<li>优点：<ul>
+<li>可解释性强</li>
+<li>可以引入同期的特征变量改善预测效果</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>由于是监督学习的回归问题，所以需要决定模型的输入变量中含有引入多少个历史的观测值，并且这一步骤起着决定性的作用</li>
+<li>训练所需的数据量较传统的时序预测方法要大</li>
+<li>不能进行多步预测，一次只能预测一个时间点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>神经网络类：RNN/GRU/LSTM/TCN/N-BEATS等</p>
+<ul>
+<li><p>以循环神经网络为主：RNN/GRU/LSTM</p>
+<p><img src="RNN.png" alt="循环神经网络"></p>
+<p>循环神经网络因其在预测时会利用包含时间状态的hidden state而广泛应用于时序预测问题上，现已成为深度学习中解决时序预测问题的重要工具之一。</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>时空卷积网络：TCN（Temporal Convolution Network）</p>
+<p><img src="TCN.png" alt="TCN"></p>
+<p>2018年，Bai等人提出了TCN网络。实质上，TCN是CNN的变形，主要思路是以一维的CNN做卷积且加上skip connection的机制，从而起到自动提取时间特征的作用，相关论文中TCN的表现已经与其他循环神经网络模型的相当，甚至更加出色。并且因其卷积的性质，TCN训练速度更胜一筹。<a href="https://arxiv.org/pdf/1803.01271.pdf" target="_blank" rel="noopener">Read the paper</a> | <a href="https://github.com/locuslab/TCN" target="_blank" rel="noopener">Github</a></p>
+</li>
+</ul>
+<ul>
+<li><p>N-BEATS</p>
+<p><img src="NBEATS.png" alt="N-BEATS"></p>
+<p>N-BEATS是基于统计模型+深度网络的模型，利用多个残差block的堆叠实现对时序的拟合。N-BEATS根据block中$g^b$和$g^f$的选择可分成generic架构和interpretable架构，其中interpretable架构里有<strong>趋势</strong>模式和<strong>季节</strong>模式。使用者也可根据问题的需要自行设计$g^b$和$g^f$。<a href="https://arxiv.org/pdf/1905.10437.pdf" target="_blank" rel="noopener">Read the paper</a> |<a href="https://github.com/philipperemy/n-beats" target="_blank" rel="noopener">Github</a></p>
+</li>
+</ul>
+<ul>
+<li>此类方法的优缺点：<ul>
+<li>优点：能够拟合非常复杂的pattern以及能够加入同期的特征值，并且特征值不用进行过多的特征工程</li>
+<li>缺点：训练所需的数据量大，超参对模型表现的影响很大；训练时间较长；需要决定模型的输入变量中含有引入多少个历史的观测值，并且这一步骤起着决定性的作用</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>时序分解+机器学习：Facebook-prophet</p>
+<p>prophet的提出是基于Facebook的业务场景，由于FB有着大量的以时间为维度的社交数据（如每天发博文的数量），并且社交数据与节假日强相关，所以FB提出了一个基于时序分量的深度学习模型，利用机器学习的方法分别利用对<strong>季节项</strong>，<strong>趋势项</strong>，<strong>剩余项</strong>进行建模和拟合。并且此方法已是工业级的应用了。<a href="https://peerj.com/preprints/3190/#" target="_blank" rel="noopener">Read the paper</a> |<a href="https://facebook.github.io/prophet/" target="_blank" rel="noopener">Github</a></p>
+<ul>
+<li>优点：工业级的时序预测算法；对节假日因素敏感；可加入同期的特征值；有较好的可解释性；模型训练耗时少；</li>
+<li>缺点：只支持日维度以上的数据；Python库的安装较为复杂，容易引起依赖问题；</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>概率模型类：DeepAR等</p>
+<p><img src="DeepAR.jpg" alt="DeepAR网络图"></p>
+<p>DeepAR模型是由Amazon提出的，基于循环神经网络的自回归模型，值得注意的是，模型输出的是对预测值的概率分布，这在实际应用中有着非常强的实用性。<a href="https://arxiv.org/pdf/1704.04110.pdf" target="_blank" rel="noopener">Read the paper</a> | <a href="https://github.com/awslabs/gluon-ts" target="_blank" rel="noopener">Python: gloun-ts</a></p>
+<ul>
+<li>优缺点：<ul>
+<li>优点：输出是概率分布，具有较强的实用性；号称可以学习到全局模型，可以使得某些有少量历史数据的item可能“cold start”；</li>
+<li>缺点：训练耗时长；需要大量的训练数据；算法未从gluon-ts包脱离，较难单独使用；</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>其实DeepAR号称可以学习全局模型，其实就是把所有item的数据作为整体训练而已</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="1-3-两类方法的实操建议"><a href="#1-3-两类方法的实操建议" class="headerlink" title="1.3 两类方法的实操建议"></a>1.3 两类方法的实操建议</h4><ul>
+<li><p>短期预测与长期预测的模型选择</p>
+<p>其实笔者在实际使用时发现，对于短期的预测，大多数基于学习的模型的表现比基于统计的模型要好；而对于长期预测的话，其实大多数基于学习的模型的效果并不好，反而基于统计的模型效果还不错。</p>
+</li>
+<li><p>短时序和长时序的模型选择</p>
+<p>基于统计的模型在短时序的效果往往比基于学习的模型要好</p>
+</li>
+</ul>
+<h3 id="2-基于多条序列的预测算法"><a href="#2-基于多条序列的预测算法" class="headerlink" title="2. 基于多条序列的预测算法"></a>2. 基于多条序列的预测算法</h3><p>在实际问题中，我们要预测的往往是多条具有一定相关性的序列，此时可以通过模型来习得序列间的相关性/共性，从而改善在单序列的预测精度。常用的算法有：</p>
+<ul>
+<li><p>VAR （Vector Auto-Regressive）：</p>
+<ul>
+<li>VAR是一个基于统计的预测算法，主要思路是把不同时序的观测值当作变量纳入到当前时序的预测中，已在计量经济学上广泛使用。不过，VAR的假设前提是所有序列是平稳的。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>一个有两个变量的VAR(1)模型（1表示只关心前一个时间点会对预测结果造成影响）的公式为：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+y_{1,t} \\
+y_{2,t}
+\end{bmatrix} = 
+\begin{bmatrix}
+c_1 \\
+c_2
+\end{bmatrix} +
+\begin{bmatrix}
+A_{1,1} & A_{1,2}\\
+A_{2,1} & A_{2,2}
+\end{bmatrix}
+\begin{bmatrix}
+y_{1,t-1} \\
+y_{2,t-1}
+\end{bmatrix} + 
+\begin{bmatrix}
+e_{1,t} \\
+e_{2,t}
+\end{bmatrix}， 其中c是常数，A是系数，e是误差项</script></li>
+<li><p>优缺点：</p>
+<ul>
+<li>优点：模型简单，能快速训练；可解释性强；</li>
+<li>缺点：无法学习非线性关系；对时序的要求是平稳序列；</li>
+</ul>
+</li>
+<li><a href="https://www.statsmodels.org/dev/vector_ar.html" target="_blank" rel="noopener">Python: statsmodels.tsa.vector_ar</a></li>
+</ul>
+<ul>
+<li><p>基于矩阵分解的算法：MOAR，BHT-ARIMA</p>
+<p>基于矩阵分解的算法的主要思路是，把多条时序的数据当作矩阵，利用了矩阵分解的技术，提取有效特征，再在特征维度上做预测，然后把预测结果转回原始的时序空间中，得到多条时序的预测结果。并且，由于是采用矩阵分解的技术同时对多条时序提取特征，所以在多时序的预测中，不用单独对单时序进行建模，其训练时间远低于其他时序预测算法。</p>
+<ul>
+<li>MOAR：Jing等人在2018年提出的基于Tucker分解和自回归模型（AR）的多时序预测算法。通过tucker分解提取出特征分量，再用AR模型对特征分量进行预测，然后将预测的特征分量逆转回时序空间中，得出预测结果。<a href="https://ieeexplore.ieee.org/document/8359393" target="_blank" rel="noopener">Read the paper</a></li>
+<li><p>BHT-ARIMA：Shi等人受到MOAR算法的启发，在2019年提出了基于Tucker分解、多路延迟嵌入（MDT）和ARIMA的多时序预测算法BHT-ARIMA。BHT-ARIMA算法相比于MOAR算法更能处理非平稳序列，并且在预测特征分量的时候引入了ARIMA算法，大大的提高了预测精度。<a href="https://arxiv.org/abs/2002.12135" target="_blank" rel="noopener">Read the paper</a> |<a href="https://github.com/huawei-noah/BHT-ARIMA" target="_blank" rel="noopener">Github</a> </p>
+</li>
+<li><p>优缺点：</p>
+<ul>
+<li>优点：在需要同时预测多条序列的场景下，训练时间极短；能够通过矩阵分解的方式提取序列间的相关信息；</li>
+<li>缺点：不能加入同期的特征改善预测效果；不能学习到序列间存在较为复杂的模式；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>基于联合学习/元学习：MAML框架下的预测算法</p>
+<p><img src="maml-1.png" alt="MAML-1"></p>
+<p>元学习（Meta-learning）解决的是学习如何学习的问题。当我们通过许多异质的先验知识学习到元学习模型后，我们用少许的本问题的训练数据对元模型进行再训练，就能对本问题有很好的学习效果。</p>
+<p><img src="MAML-2.png" alt="MAML-2"></p>
+<p>MAML(Model-Agnosticc Meta-Learning)是元学习中里程碑式的算法框架，其主要思想是通过学习梯度的梯度来学习到元知识。众所周知，神经网络大部分是通过梯度下降来收敛网络中的权重的，我们暂且把梯度下降理解成学习的行为。MAML框架设置了内外两层循环，外循环是用于获得学习异质数据时产生的梯度信息，而内循环是用于求这些梯度信息的梯度（可以理解为学习如何学习这些异质数据）。</p>
+</li>
+</ul>
+<p>  而MAML其实是与模型无关的，只有我们把模型换成时序预测模型，就能实现基于元学习的时序预测，当然，模型必须是神经网络模型，否则MAML无法学习到“梯度的梯度”。例如，把MAML和LSTM、TCN、N-BEATS结合起来。<a href="https://arxiv.org/abs/1703.03400" target="_blank" rel="noopener">Read the paper</a> | <a href="https://github.com/cbfinn/maml" target="_blank" rel="noopener">Github</a></p>
+<ul>
+<li>优缺点：<ul>
+<li>优点：能通过异质的数据学习到公共模式；可以解决cold start的问题；泛化能力强且不受模型约束；</li>
+<li>缺点：训练时间久；需要对超参进行调优；模型表现不太稳定；</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/time-series-forecasting/" rel="tag"># time-series-forecasting</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/28/概率统计2/" rel="next" title="概率论与数理统计(二)">
+                <i class="fa fa-chevron-left"></i> 概率论与数理统计(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jason Cai">
+            
+              <p class="site-author-name" itemprop="name">Jason Cai</p>
+              <p class="site-description motion-element" itemprop="description">瞎写的，瞎看呗</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-单条序列的时序预测算法"><span class="nav-number">1.</span> <span class="nav-text">1. 单条序列的时序预测算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-基于统计的算法"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 基于统计的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-1-泛ARIMA类"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.1 泛ARIMA类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-2-泛指数平滑类-ETS"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.1.2 泛指数平滑类(ETS)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一次指数平滑"><span class="nav-number">1.1.3.</span> <span class="nav-text">一次指数平滑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二次指数平滑"><span class="nav-number">1.1.4.</span> <span class="nav-text">二次指数平滑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三次指数平滑"><span class="nav-number">1.1.5.</span> <span class="nav-text">三次指数平滑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-3-基于时序分解-预测-合成的算法"><span class="nav-number">1.1.6.</span> <span class="nav-text">1.1.3 基于时序分解-预测-合成的算法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-基于学习的算法"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 基于学习的算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-两类方法的实操建议"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 两类方法的实操建议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-基于多条序列的预测算法"><span class="nav-number">2.</span> <span class="nav-text">2. 基于多条序列的预测算法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jason Cai</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
