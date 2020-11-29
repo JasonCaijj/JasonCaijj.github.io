@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/11/29/时序预测SURVEY/DeepAR.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/11/29/时序预测SURVEY/maml-1.png">
 <meta property="og:image" content="http://yoursite.com/2020/11/29/时序预测SURVEY/MAML-2.png">
-<meta property="og:updated_time" content="2020-11-29T07:13:56.552Z">
+<meta property="og:updated_time" content="2020-11-29T07:19:54.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="时序预测SURVEY">
 <meta name="twitter:description" content="时间序列，是一组按照时间发生顺序而排列的数据序列。而时序预测，则是对这些数据序列关于未来一段时间的预测。根据预测标的的数目和性质，我们可以把预测标的分为以下三类：  单条时序，如小明在某段时间内的银行余额流水 多条且有一定相关性的时序，如小明及其家人某段时间内的银行余额流水  本Survey将根据预测标的为总分类标准，介绍常用的及较为sota的时序预测算法。 1. 单条序列的时序预测算法对于单条时">
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-11-29T15:13:56+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-11-29T15:19:54+08:00">
                 2020-11-29
               </time>
             
@@ -452,7 +452,7 @@ s_t &= \gamma \frac{y_t}{\hat{y_{t-1}}} + (1-\gamma)s_{t-m}
 <ul>
 <li>分解：<ul>
 <li>常用的分解方法有：<ul>
-<li>STL(Seasonal and Trend decomposition using Loess)：此方法能把序列分解为<strong>趋势项</strong>，<strong>季节项</strong>， <strong>残差项</strong>，因此可解释性较强。[Python：statsmodels.tsa][<a href="https://www.statsmodels.org/stable/generated/statsmodels.tsa.seasonal.STL.html#statsmodels.tsa.seasonal.STL" target="_blank" rel="noopener">https://www.statsmodels.org/stable/generated/statsmodels.tsa.seasonal.STL.html#statsmodels.tsa.seasonal.STL</a>]</li>
+<li>STL(Seasonal and Trend decomposition using Loess)：此方法能把序列分解为<strong>趋势项</strong>，<strong>季节项</strong>， <strong>残差项</strong>，因此可解释性较强。<br><a href="https://www.statsmodels.org/stable/generated/statsmodels.tsa.seasonal.STL.html#statsmodels.tsa.seasonal.STL" target="_blank" rel="noopener">Python：statsmodels.tsa</a></li>
 <li>EMD(Empirical Mode Decomposition)：此方法能把序列分解为数个IMF分量序列和残差，每个IMF分量都是平稳的，且残差代表着长期趋势。此方法过往广泛应用于海洋科学和地质科学中，后逐渐在经济领域中流行。<a href="https://pypi.org/project/pyemd/" target="_blank" rel="noopener">Python: pyemd</a></li>
 </ul>
 </li>
